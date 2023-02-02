@@ -7,7 +7,7 @@ Events are automatically imported into an H2 Database upon each application star
 
 This program executes the following ask:
 
-> How many events did customer X send in the one hour buckets between timestamps A and B. 
+> How many events did customer X send in one hour buckets between timestamps A and B. 
 
 Example following events for a single customer:
 
