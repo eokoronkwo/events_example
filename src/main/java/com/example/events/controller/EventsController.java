@@ -2,6 +2,7 @@ package com.example.events.controller;
 
 import com.example.events.entity.Events;
 import com.example.events.models.EventsRequest;
+import com.example.events.models.EventsResponse;
 import com.example.events.service.EventsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,7 @@ public class EventsController {
 
     @GetMapping("/events")
     @ResponseBody
-    public List<Events> fetchEventsByCustomerIdAndTime(@RequestBody EventsRequest request) {
+    public List<EventsResponse> fetchEventsByCustomerIdAndTime(@RequestBody EventsRequest request) {
         return eventsService.findByCustomerIdAndTimestampBetween(request);
     }
 }

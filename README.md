@@ -21,4 +21,11 @@ With start and end timestamps of Mar 1 3:00 am - Mar 1 6:00 am, this is the outp
 - 2022-03-01T04:00:00Z bucket -> 2
 - 2022-03-01T05:00:00Z bucket -> 1
 
+After 
+
+{
+"customerId":"30330c9c4e7173ba9474c46ee5191570",
+"startTime":"2021-03-01T00:01:35.259+00",
+"endTime":"2021-03-01T00:04:36.259+00"
+}
 
