@@ -20,7 +20,7 @@ public class EventsController {
 
     @GetMapping("/events")
     @ResponseBody
-    public List<EventsResponse> fetchEventsByCustomerIdAndTime(@RequestBody EventsRequest request) {
+    public List<String> fetchEventsByCustomerIdAndTime(@RequestBody EventsRequest request) {
         return eventsService.findByCustomerIdAndTimestampBetween(request);
     }
 }
