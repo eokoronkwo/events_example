@@ -21,7 +21,7 @@ With start and end timestamps of Mar 1 3:00 am - Mar 1 6:00 am, this is the outp
 - 2022-03-01T04:00:00Z bucket -> 2
 - 2022-03-01T05:00:00Z bucket -> 1
 
-The application runs with an embedded H2 Database loaded from date from the `events.csv` file.
+The application runs with an embedded H2 Database loaded from data from the `events.csv` file.
 Tests also use the embedded database with additional inserted test data.
 
 After starting the application, the application can be tested by sending a get
