@@ -40,6 +40,4 @@ An example request body that will trigger the request body validators and throw 
 >      "startTime": "2021-03-01T06:00:00+00",
 >      "endTime":"2021-03-01T03:01:30.259+00"
 >     }
-
-
-{ "customerId":"30330c9c4e7173ba9474c46ee5191570", "startTime": "2021-03-01T06:00:00+00","endTime":"2021-03-01T03:01:30.259+00" }
+>     
