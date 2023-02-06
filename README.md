@@ -21,16 +21,25 @@ With start and end timestamps of Mar 1 3:00 am - Mar 1 6:00 am, this is the outp
 - 2022-03-01T04:00:00Z bucket -> 2
 - 2022-03-01T05:00:00Z bucket -> 1
 
-After 
+Application runs with an embedded H2 Database with data loaded from a CSV file.
+Tests also use the embedded database with additional inserted test data.
 
-{
-"customerId":"30330c9c4e7173ba9474c46ee5191570",
-"startTime":"2021-03-01T00:01:35.259+00",
-"endTime":"2021-03-01T00:04:36.259+00"
-}
+After starting the application, the application can be tested by sending a get
+request to localhost:8080/events with a request body of:
 
-{
-"customerId":"30330c9c4e7173ba9474c46ee5191570",
-"startTime":"2021-03-01T01:01:35.259+00",
-"endTime":"2021-03-01T04:08:36.259+00"
-}
+>     {
+>      "customerId":"30330c9c4e7173ba9474c46ee5191570",
+>      "startTime":"2021-03-01T01:01:35.259+00",
+>      "endTime":"2021-03-01T04:08:36.259+00" 
+>     }
+
+An example request body that will trigger the request body validators and throw a bad request:
+
+>     {
+>      "customerId":"30330c9c4e7173ba9474c46ee5191570",
+>      "startTime": "2021-03-01T06:00:00+00",
+>      "endTime":"2021-03-01T03:01:30.259+00"
+>     }
+
+
+{ "customerId":"30330c9c4e7173ba9474c46ee5191570", "startTime": "2021-03-01T06:00:00+00","endTime":"2021-03-01T03:01:30.259+00" }
