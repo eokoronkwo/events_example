@@ -1,8 +1,8 @@
 package com.example.events.service.impl;
 
 import com.example.events.entity.Events;
-import com.example.events.models.EventsRequest;
-import com.example.events.models.EventsResponse;
+import com.example.events.model.EventsRequest;
+import com.example.events.model.EventsResponse;
 import com.example.events.repository.EventsRepository;
 import com.example.events.service.EventsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class EventServiceImpl implements EventsService {
     private EventsRepository eventsRepository;
 
     @Override
-    public List<String> findByCustomerIdAndTimestampBetween(EventsRequest request) {
+    public List<EventsResponse> findByCustomerIdAndTimestampBetween(EventsRequest request) {
         var requestZone = request.getStartTime().getZone();
         var startTime = request.getStartTime();
         var endTime = request.getEndTime();
@@ -28,40 +28,40 @@ public class EventServiceImpl implements EventsService {
         }
         var eventsList = eventsRepository.findByCustomerIdAndTimestampBetweenOrderByTimestampAsc(
                 request.getCustomerId(), request.getStartTime(), request.getEndTime());
-        var timestampBucketList = new ArrayList<String>();
+        var timestampBucketList = new ArrayList<EventsResponse>();
         var currentBucketTotal = 0;
         var currentTime = startTime.withMinute(0).withSecond(0);
-        System.out.println("initial current time");
-        System.out.println(currentTime);
+//        System.out.println("initial current time");
+//        System.out.println(currentTime);
         var nextCurrentTime = startTime.plusHours(1).withMinute(0).withSecond(0);
-        System.out.println("initial next current time");
-        System.out.println(nextCurrentTime);
+//        System.out.println("initial next current time");
+//        System.out.println(nextCurrentTime);
         for (Events event: eventsList) {
-            System.out.println("event timestamp");
-            System.out.println(event.getTimestamp());
+//            System.out.println("event timestamp");
+//            System.out.println(event.getTimestamp());
             if (event.getTimestamp().withZoneSameInstant(requestZone).isBefore(nextCurrentTime)) {
-                System.out.println("adding to total");
+//                System.out.println("adding to total");
                 currentBucketTotal += 1;
-                System.out.println("total is now");
-                System.out.println(currentBucketTotal);
+//                System.out.println("total is now");
+//                System.out.println(currentBucketTotal);
                 continue;
             }
             timestampBucketList.add(new EventsResponse(
                     currentTime.toOffsetDateTime().truncatedTo( ChronoUnit.MINUTES ).toString(),
-                    currentBucketTotal).toString());
+                    currentBucketTotal));
             currentTime = nextCurrentTime;
-            System.out.println("new current time");
-            System.out.println(currentTime);
+//            System.out.println("new current time");
+//            System.out.println(currentTime);
             nextCurrentTime = currentTime.plusHours(1);
-            System.out.println("new next current time");
-            System.out.println(nextCurrentTime);
+//            System.out.println("new next current time");
+//            System.out.println(nextCurrentTime);
             currentBucketTotal = 0;
         }
         timestampBucketList.add(new EventsResponse(
                 currentTime.toOffsetDateTime().truncatedTo( ChronoUnit.MINUTES ).toString(),
-                currentBucketTotal).toString());
-        System.out.println("end list");
-        System.out.println(timestampBucketList);
+                currentBucketTotal));
+//        System.out.println("end list");
+//        System.out.println(timestampBucketList);
         return timestampBucketList;
     }
 }
